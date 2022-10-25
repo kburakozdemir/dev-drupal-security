@@ -5,16 +5,13 @@
  */
 
 require 'vendor/autoload.php';
+require 'config.php';
 
 use GuzzleHttp\Client;
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 
 $headers = [
   'Content-Type' => 'application/json',
-  'X-Hasura-Admin-Secret' => $_ENV['XHASURAADMINSECRET'],
+  'X-Hasura-Admin-Secret' => $XHASURAADMINSECRET,
 ];
 
 $client = new Client([
@@ -22,10 +19,10 @@ $client = new Client([
 ]);
 
 
-$response = $client->get($_ENV['XHASURAURLLRT']);
+$response = $client->get($XHASURAURLLRT);
 
 print_r($response->getBody()->getContents());
 
-$response = $client->get($_ENV['XHASURAURLSEC']);
+$response = $client->get($XHASURAURLSEC);
 
 print_r($response->getBody()->getContents());
