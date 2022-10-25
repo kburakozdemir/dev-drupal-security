@@ -1,0 +1,4 @@
+name: dev-drupal-security
+recipe: lamp
+config:
+  webroot: .
