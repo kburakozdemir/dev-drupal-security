@@ -2,3 +2,6 @@ vendor/
 .env
 config.php
 .vscode/
+
+notes
+notes/
