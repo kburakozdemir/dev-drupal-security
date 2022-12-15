@@ -85,6 +85,14 @@ $client = new Client([
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Ticimax Web Service Denemeleri</h2>
+      <a href="tkategori.php">ticimax kategori</a>
+      <br>
+      <a href="turun.php">ticimax çift ürün</a>
+    </div>
+  </div>
 </div>
 </body>
 </html>
