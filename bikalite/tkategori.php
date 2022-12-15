@@ -2,6 +2,28 @@
 
 /**
  * @file
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php'; ?>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <header>
+        <h1>Kategoriler</h1>
+      </header>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+<?php
+
+/**
+ * @file
  * Gets the category list from bikalite web service.
  */
 
@@ -50,3 +72,9 @@ else {
   }
 
 }
+?>
+</div>
+</div>
+</div>
+</body>
+</html>
