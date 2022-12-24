@@ -1,11 +1,20 @@
 name: dev-drupal-security
-recipe: lamp
-config:
-  database: mysql:5.7.40
+proxy:
+  appserver:
+    - dev-drupal-security.lndo.site
 services:
   appserver:
-    type: php:8.1
+    ssl: true
+    type: 'php:8.1'
+    via: apache
     xdebug: debug
     config:
       php: scripts/lando-customizations/php.ini
     webroot: .
+tooling:
+  composer:
+    service: appserver
+    cmd: composer --ansi
+  php:
+    service: appserver
+    cmd: php
