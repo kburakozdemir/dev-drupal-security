@@ -2,11 +2,10 @@ name: dev-drupal-security
 recipe: lamp
 config:
   database: mysql:5.7.40
-
 services:
   appserver:
     type: php:8.1
-    webroot: .
     xdebug: debug
     config:
       php: scripts/lando-customizations/php.ini
+    webroot: .

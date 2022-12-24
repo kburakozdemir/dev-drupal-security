@@ -1,0 +1,33 @@
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-bordered table-sm caption-top">
+		<caption>
+			Drive Space
+		</caption>
+		<tr>
+			<th class="text-capitalize">id</th>
+			<th class="text-capitalize">server_name</th>
+			<th class="text-capitalize">server_location</th>
+			<th class="text-capitalize">fs</th>
+			<th class="text-capitalize">mount</th>
+			<th class="text-capitalize">size</th>
+			<th class="text-capitalize">used</th>
+			<th class="text-capitalize">used %</th>
+			<th class="text-capitalize">avail</th>
+			<th class="text-capitalize">created</th>
+		</tr>
+		{% for drive in driveSpaceData %}
+			<tr>
+				<td>{{ drive.id }}</td>
+				<td>{{ drive.server_name }}</td>
+				<td>{{ drive.server_location }}</td>
+				<td>{{ drive.fs }}</td>
+				<td>{{ drive.mount }}</td>
+				<td class="text-end">{{ ((drive.size / (1024*1024)) | round(2, 'ceil')) | number_format(2) }}</td>
+				<td class="text-end">{{ ((drive.used / (1024*1024)) | round(2, 'ceil')) | number_format(2) }}</td>
+				<td class="text-end">{{ (((drive.used / drive.size) * 100) | round(2, 'ceil')) | number_format(2) }}</td>
+				<td class="text-end">{{ ((drive.avail / (1024*1024)) | round(2, 'ceil')) | number_format(2) }}</td>
+				<td>{{ drive.created }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>

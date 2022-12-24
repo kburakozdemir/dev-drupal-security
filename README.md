@@ -33,3 +33,9 @@ https://bikalite.com/Servis/UrunServis.svc?xsd=xsd4
 https://www.r10.net/php/1933519-ticimax-webservis-ile-urun-olusturmak.html
 
 https://www.wsdltophp.com/Wsdls/2ae78ddb4865e49f0e8cbcb2307d3a31/Ticimax-1-0-1-1-1-1-0-0-0-0
+
+## Compile SCSS
+
+```bash
+sass --style compressed css/style.scss:css/style.css
+```
