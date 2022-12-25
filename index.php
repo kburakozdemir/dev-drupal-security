@@ -32,7 +32,7 @@ $contentArraySpace = $content["server_space_latest_data"];
 
 // Render our view
 $renderArray = [
-    'title' => "Deneme",
+    'title' => "Misc API Consumers",
     'lastRunTime' => $contentArrayLast,
     'securityUpdates' => $contentArraySec,
     'driveSpaceData' => $contentArraySpace
