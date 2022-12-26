@@ -39,3 +39,7 @@ https://www.wsdltophp.com/Wsdls/2ae78ddb4865e49f0e8cbcb2307d3a31/Ticimax-1-0-1-1
 ```bash
 sass --style compressed css/style.scss:css/style.css
 ```
+
+## Post Deploy
+
+Add post deploy script.
