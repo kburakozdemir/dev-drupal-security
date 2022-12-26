@@ -52,3 +52,10 @@ Command: "/home/site/deployments/tools/PostDeploymentActions/install_cmd.sh"
 /opt/Kudu/Scripts/starter.sh: line 2: /home/site/deployments/tools/PostDeploymentActions/install_cmd.sh: Success
 /opt/Kudu/Scripts/starter.sh: /home/site/deployments/tools/PostDeploymentActions/install_cmd.sh: /bin/bash^M: bad interpreter: No such file or directory\n/opt/Kudu/Scripts/starter.sh: line 2: /home/site/deployments/tools/PostDeploymentActions/install_cmd.sh: Success\n/opt/Kudu/Scripts/starter.sh "/home/site/deployments/tools/PostDeploymentActions/install_cmd.sh"
 ```
+
+```txt
+Command: "/home/site/deployments/tools/PostDeploymentActions/post.sh"
+/opt/Kudu/Scripts/starter.sh: /home/site/deployments/tools/PostDeploymentActions/post.sh: /bin/bash^M: bad interpreter: No such file or directory
+/opt/Kudu/Scripts/starter.sh: line 2: /home/site/deployments/tools/PostDeploymentActions/post.sh: Success
+/opt/Kudu/Scripts/starter.sh: /home/site/deployments/tools/PostDeploymentActions/post.sh: /bin/bash^M: bad interpreter: No such file or directory\n/opt/Kudu/Scripts/starter.sh: line 2: /home/site/deployments/tools/PostDeploymentActions/post.sh: Success\n/opt/Kudu/Scripts/starter.sh "/home/site/deployments/tools/PostDeploymentActions/post.sh"
+```
