@@ -76,47 +76,43 @@ $i = 0;
 while ($i < count($myArrayx)) {
   // echo "<em>Ürün (" . ($i + 1) . ")</em><br>";
   // echo "ID: " . $myArrayx[$i]["ID"] . " - " . $myArrayx[$i]["UrunAdi"] . " (Status: " . (($myArrayx[$i]["Aktif"]) ? "Aktif" : "Pasif") . ") (<a href='https://bikalite.com" . $myArrayx[$i]["UrunSayfaAdresi"] . "' target='_blank'>Link</a>)<br>";
-  $varCount = count($myArrayx[$i]['Varyasyonlar']['Varyasyon']);
+    $varCount = count($myArrayx[$i]['Varyasyonlar']['Varyasyon']);
   // echo "<details><summary><em>Varyantlar</em></summary>";
-  if ($varCount == 165) {
-    $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["ID"];
-    $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["UrunKartiID"];
-    $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokAdedi"];
-    $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokKodu"];
-    $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon']["Aktif"]) ? "Aktif" : "Pasif");
-    // echo "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - " . "Varyant ID: " . $id . " - " . "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
-    if (array_key_exists($stokKod, $ciftSKU)) {
-      $a = $ciftSKU[$stokKod];
-      $ciftSKU[$stokKod] = $a + 1;
-    }
-    else {
-      $ciftSKU[$stokKod] = 1;
-    }
-    $varyantlarıylabirlikteurunadet++;
-  }
-  else {
-    $v = 0;
-    while ($v < $varCount) {
-      $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["ID"];
-      $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["UrunKartiID"];
-      $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokAdedi"];
-      $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokKodu"];
-      $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["Aktif"]) ? "Aktif" : "Pasif");
+    if ($varCount == 165) {
+        $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["ID"];
+        $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["UrunKartiID"];
+        $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokAdedi"];
+        $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokKodu"];
+        $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon']["Aktif"]) ? "Aktif" : "Pasif");
       // echo "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - " . "Varyant ID: " . $id . " - " . "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
-      if (array_key_exists($stokKod, $ciftSKU)) {
-        $a = $ciftSKU[$stokKod];
-        $ciftSKU[$stokKod] = $a + 1;
-      }
-      else {
-        $ciftSKU[$stokKod] = 1;
-      }
-      $varyantlarıylabirlikteurunadet++;
-      $v++;
+        if (array_key_exists($stokKod, $ciftSKU)) {
+            $a = $ciftSKU[$stokKod];
+            $ciftSKU[$stokKod] = $a + 1;
+        } else {
+            $ciftSKU[$stokKod] = 1;
+        }
+        $varyantlarıylabirlikteurunadet++;
+    } else {
+        $v = 0;
+        while ($v < $varCount) {
+            $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["ID"];
+            $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["UrunKartiID"];
+            $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokAdedi"];
+            $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokKodu"];
+            $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["Aktif"]) ? "Aktif" : "Pasif");
+          // echo "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - " . "Varyant ID: " . $id . " - " . "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
+            if (array_key_exists($stokKod, $ciftSKU)) {
+                $a = $ciftSKU[$stokKod];
+                $ciftSKU[$stokKod] = $a + 1;
+            } else {
+                $ciftSKU[$stokKod] = 1;
+            }
+            $varyantlarıylabirlikteurunadet++;
+            $v++;
+        }
     }
-  }
   // echo "</details><hr>";
-  $i++;
-
+    $i++;
 }
 
 echo "ürün adet = " . count($myArrayx) . "<br>";
@@ -126,8 +122,9 @@ echo "varyantları ile ürün adet = " . $varyantlarıylabirlikteurunadet . "<br
 /**
  * Callback function forarray_filter.
  */
-function filter($var) {
-  return $var > 1;
+function filter($var)
+{
+    return $var > 1;
 }
 
 $ciftKesin = array_filter($ciftSKU, "filter");
@@ -135,14 +132,13 @@ $ciftKesin = array_filter($ciftSKU, "filter");
 $sonuc = count($ciftKesin);
 
 if ($sonuc == 0) {
-  echo "çift sku'lu ürün yok";
-}
-else {
-  echo "çift olan SKUlar (" . $sonuc . " Adet):<br>";
-  foreach ($ciftKesin as $x => $x_value) {
-    echo "SKU=" . $x . ", Adet=" . $x_value;
-    echo "<br>";
-  }
+    echo "çift sku'lu ürün yok";
+} else {
+    echo "çift olan SKUlar (" . $sonuc . " Adet):<br>";
+    foreach ($ciftKesin as $x => $x_value) {
+        echo "SKU=" . $x . ", Adet=" . $x_value;
+        echo "<br>";
+    }
 }
 ?>
 </div>

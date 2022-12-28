@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	{% if resultSingle %}
+		<h1>{{ resultSingle.Tanim }}</h1>
+		<p>
+			<em>
+				<a href="/bikalite/tkategori.php">Kategorilere dön</a>
+			</em>
+		</p>
+		{% for key,value in resultSingle %}
+			<details>
+				<summary>{{ key }}</summary>
+				<div>{{ value | raw }}</div>
+			</details>
+		{% endfor %}
+	{% endif %}
+
+	{% if resultMultiple %}
+		<h1>{{ title }}</h1>
+		{% for result in resultMultiple %}
+			<p>{{ result.Tanim }}
+				(Aktif:
+				{%if result.Aktif %}
+					Aktif
+				{% else %}
+					Pasif
+				{% endif %}) -
+				<a href="/bikalite/tkategori.php?catid={{ result.ID }}">{{ result.ID }}</a>
+			</p>
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}
