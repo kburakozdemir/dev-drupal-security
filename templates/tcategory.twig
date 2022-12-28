@@ -6,7 +6,7 @@
 		<h1>{{ resultSingle.Tanim }}</h1>
 		<p>
 			<em>
-				<a href="/bikalite/tkategori.php">Kategorilere dön</a>
+				<a href="/bikalite/tcategory.php">Kategorilere dön</a>
 			</em>
 		</p>
 		{% for key,value in resultSingle %}
@@ -27,7 +27,7 @@
 				{% else %}
 					Pasif
 				{% endif %}) -
-				<a href="/bikalite/tkategori.php?catid={{ result.ID }}">{{ result.ID }}</a>
+				<a href="/bikalite/tcategory.php?catid={{ result.ID }}">{{ result.ID }}</a>
 			</p>
 		{% endfor %}
 	{% endif %}

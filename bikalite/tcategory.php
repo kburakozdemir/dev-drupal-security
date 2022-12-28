@@ -36,4 +36,4 @@ $renderArray = [
     'resultMultiple' => $resultMultiple
   ];
 
-echo $twig->render('tkategori.twig', $renderArray);
+echo $twig->render('tcategory.twig', $renderArray);
