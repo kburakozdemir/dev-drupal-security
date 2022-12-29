@@ -4,11 +4,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 
-// Specify our Twig templates locations
+// Specify our Twig templates/views locations
 $paths=[
-    __DIR__.'/templates',
-    __DIR__.'/templates/partials',
-    __DIR__.'/templates/partials-layout'
+    __DIR__.'/views',
+    __DIR__.'/views/partials',
+    __DIR__.'/views/partials-layout'
 ];
 
 $loader = new \Twig\Loader\FilesystemLoader($paths);
