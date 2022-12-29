@@ -20,7 +20,7 @@
 	{% if resultMultiple %}
 		<h1>{{ title }}</h1>
 		{% for result in resultMultiple %}
-			<p>{{ result.Tanim }}
+			<h2>{{ result.Tanim }}
 				(Aktif:
 				{%if result.Aktif %}
 					Aktif
@@ -28,6 +28,9 @@
 					Pasif
 				{% endif %}) -
 				<a href="/bikalite/tcategory.php?catid={{ result.ID }}">{{ result.ID }}</a>
+			</h2>
+			<p>
+				{{ result.Icerik | raw }}
 			</p>
 		{% endfor %}
 	{% endif %}
