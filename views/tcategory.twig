@@ -1,9 +1,12 @@
+{% set buttonMarkUp = '<p><button id="collapse_all">Collapse all</button></p>' %}
+
 {% extends "layout.twig" %}
 
 {% block content %}
 
-	{% if resultSingle %}
+  {% if resultSingle %}
 		<h1>{{ resultSingle.Tanim }}</h1>
+    {{ buttonMarkUp | raw }}
 		<p>
 			<em>
 				<a href="/bikalite/tcategory.php">Kategorilere dön</a>
@@ -19,20 +22,29 @@
 
 	{% if resultMultiple %}
 		<h1>{{ title }}</h1>
+    {{ buttonMarkUp | raw }}
 		{% for result in resultMultiple %}
-			<h2>{{ result.Tanim }}
-				(Aktif:
-				{%if result.Aktif %}
-					Aktif
-				{% else %}
-					Pasif
-				{% endif %}) -
-				<a href="/bikalite/tcategory.php?catid={{ result.ID }}">{{ result.ID }}</a>
-			</h2>
-			<p>
-				{{ result.Icerik | raw }}
-			</p>
+			<details>
+				<summary>
+					<h2>{{ result.Tanim }}
+						(Aktif:
+						{%if result.Aktif %}
+							Aktif
+						{% else %}
+							Pasif
+						{% endif %}) -
+						<a href="/bikalite/tcategory.php?catid={{ result.ID }}">{{ result.ID }}</a>
+					</h2>
+				</summary>
+				<div>
+					{{ result.Icerik | raw }}
+				</div>
+			</details>
 		{% endfor %}
 	{% endif %}
 
+{% endblock %}
+
+{% block page_based_script %}
+	<script src="/js/app-tcategory.js"></script>
 {% endblock %}

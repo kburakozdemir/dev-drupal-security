@@ -1,4 +1,26 @@
 body {
-  // margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 116px;
+  margin-bottom: 60px;
+}
+
+/* Styling the Disclosure Widgets */
+
+details {
+  margin-bottom: 5px;
+}
+
+details > summary {
+  background-color: #fdb;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+details > summary > * {
+  display: inline;
+}
+
+details > div {
+  border: 2px solid #fdb;
+  margin-top: 0;
+  padding: 1rem;
 }
