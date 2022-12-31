@@ -19,3 +19,11 @@ function object_to_array($data)
     }
     return $data;
 }
+
+/**
+ * Callback function for array_filter.
+ */
+function ciftSKUFilter($var)
+{
+    return $var > 1;
+}

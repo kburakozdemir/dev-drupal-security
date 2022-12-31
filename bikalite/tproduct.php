@@ -56,7 +56,11 @@ while ($i < count($myArrayx)) {
         echo "<em>Ürün (" . ($i + 1) . ")</em><br>";
     }
     if ($ECHOPRODUCTDATA) {
-        echo "ID: " . $myArrayx[$i]["ID"] . " - " . $myArrayx[$i]["UrunAdi"] . " (Status: " . (($myArrayx[$i]["Aktif"]) ? "Aktif" : "Pasif") . ") (<a href='https://bikalite.com" . $myArrayx[$i]["UrunSayfaAdresi"] . "' target='_blank'>Link</a>)<br>";
+        $echoTxt = "ID: " . $myArrayx[$i]["ID"] . " - " . $myArrayx[$i]["UrunAdi"];
+        $echoTxt .= " (Status: " . (($myArrayx[$i]["Aktif"]) ? "Aktif" : "Pasif");
+        $echoTxt .= ") (<a href='https://bikalite.com" . $myArrayx[$i]["UrunSayfaAdresi"];
+        $echoTxt .= "' target='_blank'>Link</a>)<br>";
+        echo $echoTxt;
     }
         $varCount = count($myArrayx[$i]['Varyasyonlar']['Varyasyon']);
     if ($ECHOPRODUCTDATA) {
@@ -69,7 +73,11 @@ while ($i < count($myArrayx)) {
         $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokKodu"];
         $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon']["Aktif"]) ? "Aktif" : "Pasif");
         if ($ECHOPRODUCTDATA) {
-            echo "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - " . "(Excelde URUNID kolonu) Varyant ID: " . $id . " - " . "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
+            $echoTxt = "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - ";
+            $echoTxt .= "(Excelde URUNID kolonu) Varyant ID: " . $id . " - ";
+            $echoTxt .= "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod;
+            $echoTxt .= " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
+            echo $echoTxt;
         }
         if (array_key_exists($stokKod, $ciftSKU)) {
             $a = $ciftSKU[$stokKod];
@@ -87,7 +95,11 @@ while ($i < count($myArrayx)) {
             $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokKodu"];
             $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["Aktif"]) ? "Aktif" : "Pasif");
             if ($ECHOPRODUCTDATA) {
-                echo "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - " . "(Excelde URUNID kolonu) Varyant ID: " . $id . " - " . "Urun Kartı ID: " . $urunKartiID . " - " . $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
+                $echoTxt = "<p><em>(" . ($varyantlarıylabirlikteurunadet + 1) . ")</em> - ";
+                $echoTxt .= "(Excelde URUNID kolonu) Varyant ID: " . $id . " - ";
+                $echoTxt .= "Urun Kartı ID: " . $urunKartiID . " - ";
+                $echoTxt .= $stokKod . " - Stok Adedi: " . $stokAdedi . " (Status: " . $status . ")</p>";
+                echo $echoTxt;
             }
             if (array_key_exists($stokKod, $ciftSKU)) {
                 $a = $ciftSKU[$stokKod];
@@ -111,19 +123,9 @@ array_push($results, "ürün adet = " . count($myArrayx));
 
 array_push($results, "varyantları ile ürün adet = " . $varyantlarıylabirlikteurunadet);
 
-/**
- * Callback function forarray_filter.
- */
-function filter($var)
-{
-    return $var > 1;
-}
-
-$ciftKesin = array_filter($ciftSKU, "filter");
+$ciftKesin = array_filter($ciftSKU, "ciftSKUFilter");
 
 $sonuc = count($ciftKesin);
-
-
 
 if ($sonuc == 0) {
     array_push($results, "çift sku'lu ürün yok");
