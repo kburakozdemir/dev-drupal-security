@@ -1,7 +1,6 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
 $catid = 0;
 if (isset($_GET["catid"]) && !empty($_GET["catid"])) {

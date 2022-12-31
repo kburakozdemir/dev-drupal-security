@@ -3,6 +3,7 @@
 // Load our autoloader and config
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
 // Specify our Twig templates/views locations
 $paths=[

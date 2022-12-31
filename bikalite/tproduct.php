@@ -2,36 +2,12 @@
 
 /**
  * @file
- */
-
-$ECHOPRODUCTDATA=false;
-?>
-<!DOCTYPE html>
-<html lang="en">
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php'; ?>
-<body>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <header>
-        <h1>Ürünler</h1>
-      </header>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-<?php
-
-/**
- * @file
  * Gets the product list from bikalite web service.
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
+
+$ECHOPRODUCTDATA=false;
 
 $wsdl_url = $TICIMAXWSDLURL;
 $client = new SOAPClient($wsdl_url, ["trace" => 1]);
@@ -63,9 +39,9 @@ $params = [
   "s" => $urunSayfalama,
 ];
 
-$result = $client->SelectUrun($params);
+$results = $client->SelectUrun($params);
 
-$myArray = object_to_array($result->SelectUrunResult);
+$myArray = object_to_array($results->SelectUrunResult);
 
 $myArrayx = $myArray["UrunKarti"];
 
@@ -129,9 +105,11 @@ while ($i < count($myArrayx)) {
     $i++;
 }
 
-echo "ürün adet = " . count($myArrayx) . "<br>";
+$results = [];
 
-echo "varyantları ile ürün adet = " . $varyantlarıylabirlikteurunadet . "<br>";
+array_push($results, "ürün adet = " . count($myArrayx));
+
+array_push($results, "varyantları ile ürün adet = " . $varyantlarıylabirlikteurunadet);
 
 /**
  * Callback function forarray_filter.
@@ -145,18 +123,21 @@ $ciftKesin = array_filter($ciftSKU, "filter");
 
 $sonuc = count($ciftKesin);
 
+
+
 if ($sonuc == 0) {
-    echo "çift sku'lu ürün yok";
+    array_push($results, "çift sku'lu ürün yok");
 } else {
-    echo "çift olan SKUlar (" . $sonuc . " Adet):<br>";
+    array_push($results, "çift olan SKUlar (" . $sonuc . " Adet):");
     foreach ($ciftKesin as $x => $x_value) {
-        echo "SKU=" . $x . ", Adet=" . $x_value;
-        echo "<br>";
+        array_push($results, "SKU=" . $x . ", Adet=" . $x_value);
     }
 }
-?>
-</div>
-</div>
-</div>
-</body>
-</html>
+
+// Render our view
+$renderArray = [
+    'title' => "Ürünler",
+    'results' => $results
+  ];
+
+echo $twig->render('tproduct.twig', $renderArray);
