@@ -69,6 +69,14 @@ function colorize() {
         .removeClass(["pink", "red", "orange", "yellow"])
         .addClass("green");
     }
+
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "13" &&
+      jQuery(this).hasClass("green")
+    ) {
+      jQuery(this).removeClass("green").addClass("black");
+    }
   });
 }
 
@@ -109,7 +117,9 @@ function people() {
   const array = [];
   jQuery("div.green").each(function () {
     value = {
-      ad: jQuery(this).find(".uye").html() + pad(jQuery(this).find(".uyeid").html(), 10),
+      ad:
+        jQuery(this).find(".uye").html() +
+        pad(jQuery(this).find(".uyeid").html(), 10),
       adet: 1,
       total: parseFloat(jQuery(this).find(".total").html()),
     };
@@ -129,9 +139,9 @@ function people() {
   for (var i = 0; i < array.length; i++) {
     jQuery("#people").append(
       "Uye: " +
-        (array[i].ad).slice(0, -10) +
+        array[i].ad.slice(0, -10) +
         ", Uye ID: " +
-        (array[i].ad).slice(-10) +
+        array[i].ad.slice(-10) +
         ", Sipariş Adet: " +
         array[i].adet +
         ", Sipariş Tutar: " +
