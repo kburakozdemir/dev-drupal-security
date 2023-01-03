@@ -14,10 +14,15 @@ $ECHOPRODUCTDATA=false;
 $wsdl_url = $TICIMAXWSDLURLSIP;
 $client = new SOAPClient($wsdl_url, ["trace" => 1]);
 
+$id = -1;
+if (isset($_GET["id"]) && !empty($_GET["id"])) {
+    $id = $_GET["id"];
+}
+
 $urunFiltre = [
     "EntegrasyonAktarildi" => -1,
     "SiparisDurumu" => -1,
-    "SiparisID" => -1,
+    "SiparisID" => $id,
     "SiparisKaynagi" => "",
     "SiparisKodu" => "",
     "OdemeDurumu" => -1,

@@ -1,33 +1,89 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+	<style>
+		.pink {
+			background-color: pink;
+		}
+		.red {
+			background-color: red;
+		}
+		.orange {
+			background-color: orange;
+		}
+		.green {
+			background-color: green;
+		}
+		.yellow {
+			background-color: yellow;
+		}
+	</style>
 	<h1>{{ title }}</h1>
-	{% for result in results %}
-		<p>{{ result.Durum }}
-			({{ result.SiparisDurumu }})
-						-
-			{{ result.PaketlemeDurumu }}
-			{{ result.PaketlemeDurumuID }}
-			-
-			{{ result.ID }}
-			-
-			{{ result.UyeAdi }}
-			{{ result.UyeSoyadi }}
-			-
-			{{ result.UyeID }}
-			-
-			{{ result.Mail }}
-			-
-			{{ result.SiparisTarihi }}
-			-
-			{{ result.SiparisToplamTutari }}</p>
-		{% if result.Odemeler | length > 0 %}
-			<span>ödeme var</span>
-			xxx
-			{{result.Odemeler.WebSiparisOdeme.Onaylandi}}
-		{% else %}
-			<span>ödeme yok</span>
-		{% endif %}
-	{% endfor %}
 
+	<div id="summary" style="border: cyan 2px solid; margin-bottom: 1rem;"></div>
+	<div style="border: blue 2px solid; margin-bottom: 1rem;">
+		<p class="lead">Green ones:</p>
+		<p id="summary-two"></p>
+    <p id="people" style="border: grey 2px solid;"></p>
+	</div>
+	{% for result in results %}
+		{% set odemeVarYokTest = result.Odemeler | length %}
+		{% set odemeAdet = 0 %}
+		{% set odemeOnay = [] %}
+
+		{% if odemeVarYokTest == 0 %}
+			{% set odemeVarYok = 'yok' %}
+		{% else %}
+			{% set odemeVarYok = 'var' %}
+			{% if result.Odemeler.WebSiparisOdeme.0 is defined %}
+				{% set odemeAdet = result.Odemeler.WebSiparisOdeme | length %}
+				{% for od in result.Odemeler.WebSiparisOdeme %}
+					{% if not loop.last %}
+						{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
+					{% else %}
+						{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% set odemeAdet = 1 %}
+				{% set odemeOnay = result.Odemeler.WebSiparisOdeme.Onaylandi %}
+			{% endif %}
+		{% endif %}
+
+		<div class="siparis" data-odemevaryok="{{ odemeVarYok }}" data-sd="{{ result.Durum }}" data-pd="{{ result.PaketlemeDurumuID }}" data-oo="{{ odemeOnay | join(',') }}" id="{{ result.ID }}">
+			<p>Sipariş ID:
+				{{ result.ID }}
+				|
+				{{ result.Durum }}
+				({{ result.SiparisDurumu }})
+																																																																																																																				-																														-
+				{{ result.PaketlemeDurumu }}
+				{{ result.PaketlemeDurumuID }}
+				-
+				<span class="uye">{{ result.UyeAdi }}
+					{{ result.UyeSoyadi }}</span>
+				-
+				<span class="uyeid">{{ result.UyeID }}</span>
+				-
+				{{ result.Mail }}
+				-
+				{{ result.SiparisTarihi }}
+				-
+				<span class="total">{{ result.SiparisToplamTutari }}</span>
+				-
+																				odemeVarYok:
+				{{ odemeVarYok }}
+				-
+																				odemeAdet:
+				{{ odemeAdet }}
+				odemeOnay:
+				{{ odemeOnay | join(',') }}
+			</p>
+
+		</div>
+	{% endfor %}
+{% endblock %}
+
+{% block page_based_script %}
+	<script src="/js/app-tsiparis.js"></script>
 {% endblock %}

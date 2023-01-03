@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -14,11 +15,13 @@
 
 		<div class="container mt-5">
 			<div class="row">
-				<div class="col-sm-12"> {% block content %}{% endblock %}</div>
+				<div class="col-sm-12"> {% block content %}{% endblock %}
+					</div>
+				</div>
 			</div>
-		</div>
-      {% block page_based_script %}{% endblock %}
-	  	{% include 'globalscripts.twig' %}
-      {% include 'backtotop.twig' %}
-	</body>
-</html>
+			<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+			{% block page_based_script %}{% endblock %}
+			{% include 'globalscripts.twig' %}
+			{% include 'backtotop.twig' %}
+		</body>
+	</html>
