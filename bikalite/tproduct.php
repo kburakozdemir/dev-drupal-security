@@ -9,7 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
 
 $ECHOPRODUCTDATA=false;
 
-$wsdl_url = $TICIMAXWSDLURL;
+$wsdl_url = $TICIMAXWSDLURLURU;
 $client = new SOAPClient($wsdl_url, ["trace" => 1]);
 
 $urunFiltre = [
@@ -34,7 +34,7 @@ $urunSayfalama = [
 ];
 
 $params = [
-  "UyeKodu" => $TICIMAXUYEKODU,
+  "UyeKodu" => $TICIMAXWSDLUYEKOD,
   "f" => $urunFiltre,
   "s" => $urunSayfalama,
 ];

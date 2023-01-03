@@ -7,11 +7,11 @@ if (isset($_GET["catid"]) && !empty($_GET["catid"])) {
     $catid = $_GET["catid"];
 }
 
-$wsdl_url = $TICIMAXWSDLURL;
+$wsdl_url = $TICIMAXWSDLURLURU;
 $client = new SOAPClient($wsdl_url, ["trace" => 1]);
 
 $params = [
-  "UyeKodu" => $TICIMAXUYEKODU,
+  "UyeKodu" => $TICIMAXWSDLUYEKOD,
   "kategoriID" => $catid,
   "dil" => "tr",
 ];
