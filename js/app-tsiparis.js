@@ -80,7 +80,7 @@ function colorize() {
   });
 }
 
-function summarize() {
+function summarize_one() {
   html = "";
   html += "Siparis Adedi: " + jQuery(".siparis").length + "<br/>";
 
@@ -100,7 +100,7 @@ function summarize() {
   html +=
     "Kanımca geçerli sipariş (green): " + jQuery("div.green").length + "<br/>";
 
-  jQuery("#summary").html(html);
+  jQuery("#summary-one").html(html);
 }
 
 function summarize_second() {
@@ -155,7 +155,7 @@ function people() {
 
 $(document).ready(function () {
   colorize();
-  summarize();
+  summarize_one();
   summarize_second();
   people();
 });
