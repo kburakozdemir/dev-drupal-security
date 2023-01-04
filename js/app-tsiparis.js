@@ -23,41 +23,137 @@ function pad(num, size) {
   return num;
 }
 
+function createButtons() {
+  const buttonColors = [
+    "pink",
+    "red",
+    "gray",
+    "yellow",
+    "orange",
+    "green",
+    "black",
+  ];
+  buttonColors.forEach((element) => {
+    html = `<button class="btn btn-primary" onclick="showClass('${element}');">show ${element}</button>`;
+    jQuery("#button-container").append(html);
+  });
+}
+
 function colorize() {
   jQuery(".siparis").each(function () {
+    // Color pink begins
+    // There is no payment record
     if (jQuery(this).attr("data-odemevaryok") == "yok") {
       jQuery(this).addClass("pink");
     }
+    // Color pink ends
+
+    // Color red begins
+    // Sipariş durumu: 8 (İptal Edildi) - - Paketleme durumu İptal Edildi 12
+    // Ödeme onay 0 (sıfır)
     if (
       jQuery(this).attr("data-sd") == "8" &&
-      jQuery(this).attr("data-pd") == "12"
+      jQuery(this).attr("data-pd") == "12" &&
+      jQuery(this).attr("data-oo") == "0"
     ) {
       jQuery(this).removeClass("pink").addClass("red");
     }
+    // Color red ends
+
+    // Color gray begins
+    // Sipariş durumu: 8 (İptal Edildi) - - Paketleme durumu İptal Edildi 12
+    // Ödeme onay 1 (bir) içeriyorsa
+    // Bunlar iade olmalı çünkü ödeme yapılmış
     if (
+      jQuery(this).attr("data-sd") == "8" &&
+      jQuery(this).attr("data-pd") == "12" &&
+      jQuery(this).attr("data-oo").includes("1")
+    ) {
+      jQuery(this).removeClass("pink").addClass("gray");
+    }
+
+    // Sipariş durumu: 0 (Siparişiniz Alındı) - - Paketleme durumu İptal Edildi 12
+    // Ödeme onay 1 (bir) içeriyorsa
+    // Bunlar iade olmalı çünkü ödeme yapılmış
+    if (
+      jQuery(this).attr("data-sd") == "0" &&
+      jQuery(this).attr("data-pd") == "12" &&
+      jQuery(this).attr("data-oo").includes("1")
+    ) {
+      jQuery(this).removeClass("pink").addClass("gray");
+    }
+
+    // Sipariş durumu: 4 (Paketleniyor) - - Paketleme durumu İptal Edildi 12
+    // Ödeme onay 1 (bir) içeriyorsa
+    // Bunlar iade olmalı çünkü ödeme yapılmış
+    if (
+      jQuery(this).attr("data-sd") == "4" &&
+      jQuery(this).attr("data-pd") == "12" &&
+      jQuery(this).attr("data-oo").includes("1")
+    ) {
+      jQuery(this).removeClass("pink").addClass("gray");
+    }
+    // Sipariş durumu: 8 (İptal Edildi) - - Paketleme durumu Teslimat Sonrası Telefon Aramasına Gerek Yok 13
+    // Ödeme onay 1 (bir) içeriyorsa
+    // Bunlar iade olmalı çünkü ödeme yapılmış
+    if (
+      jQuery(this).attr("data-sd") == "8" &&
+      jQuery(this).attr("data-pd") == "13" &&
+      jQuery(this).attr("data-oo").includes("1")
+    ) {
+      jQuery(this).removeClass("pink").addClass("gray");
+    }
+    // Color gray ends
+
+    // Color yellow begins
+    // Paketleme durumu İptal Edildi 12
+    // Ödeme onay 1 (bir) içermeyenler
+    // Bunlar iade değildir çünkü ödeme yapılmamış
+    if (
+      !jQuery(this).attr("data-oo").includes("1") &&
       jQuery(this).attr("data-pd") == "12" &&
       !jQuery(this).hasClass("pink") &&
-      !jQuery(this).hasClass("red")
+      !jQuery(this).hasClass("red") &&
+      !jQuery(this).hasClass("gray")
     ) {
       jQuery(this).addClass("yellow");
     }
+    // Color yellow ends
+
+    // Color orange begins
+    // Bundan önceki renkleri içermeyen
+    // Ödeme onayı 1 (bir) içermeyen
+    // This is like pink
+    //
     if (
-      jQuery(this).attr("data-oo") != "1" &&
+      !jQuery(this).attr("data-oo").includes("1") &&
       !jQuery(this).hasClass("pink") &&
-      !jQuery(this).hasClass("red")
+      !jQuery(this).hasClass("red") &&
+      !jQuery(this).hasClass("gray") &&
+      !jQuery(this).hasClass("yellow")
     ) {
       jQuery(this).addClass("orange");
     }
+    // Color orange ends
+
+    // Color green begins
+    // Ödeme onayı 1 (bir) olan
+    // Bundan önceki renkleri içermeyen
     if (
       jQuery(this).attr("data-oo") == "1" &&
       !jQuery(this).hasClass("pink") &&
       !jQuery(this).hasClass("red") &&
+      !jQuery(this).hasClass("gray") &&
       !jQuery(this).hasClass("orange") &&
       !jQuery(this).hasClass("yellow")
     ) {
       jQuery(this).addClass("green");
     }
 
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 7 (Teslim Edildi)
+    // Paketleme durumu: Teslimat Sonrası Telefonla Arandı 11 veya
+    // Paketleme durumu: Teslimat Sonrası Telefon Aramasına Gerek Yok 13
     if (
       jQuery(this).attr("data-oo").includes("1") &&
       jQuery(this).attr("data-sd") == "7" &&
@@ -66,10 +162,90 @@ function colorize() {
       !jQuery(this).hasClass("green")
     ) {
       jQuery(this)
-        .removeClass(["pink", "red", "orange", "yellow"])
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
         .addClass("green");
     }
 
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 6 (Kargoya Verildi)
+    // Paketleme durumu: Alıcıya Teslim Edildi (Kargo) 9
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "6" &&
+      jQuery(this).attr("data-pd") == "9" &&
+      !jQuery(this).hasClass("green")
+    ) {
+      jQuery(this)
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
+        .addClass("green");
+    }
+
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 0 (Siparişiniz Alındı)
+    // Paketleme durumu: Alıcıya Teslim Edildi (Kargo) 9 veya
+    // Paketleme durumu: Teslimat Sonrası Telefonla Arandı 11 veya
+    // Paketleme durumu: Teslimat Sonrası Telefon Aramasına Gerek Yok 13
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "0" &&
+      (jQuery(this).attr("data-pd") == "9" ||
+        jQuery(this).attr("data-pd") == "11" ||
+        jQuery(this).attr("data-pd") == "13") &&
+      !jQuery(this).hasClass("green")
+    ) {
+      jQuery(this)
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
+        .addClass("green");
+    }
+
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 4 (Paketleniyor)
+    // Paketleme durumu: Alıcıya Teslim Edildi (Kargo) 9 veya
+    // Paketleme durumu: Teslimat Sonrası Telefonla Arandı 11 veya
+    // Paketleme durumu: Teslimat Sonrası Telefon Aramasına Gerek Yok 13
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "4" &&
+      (jQuery(this).attr("data-pd") == "9" ||
+        jQuery(this).attr("data-pd") == "11" ||
+        jQuery(this).attr("data-pd") == "13") &&
+      !jQuery(this).hasClass("green")
+    ) {
+      jQuery(this)
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
+        .addClass("green");
+    }
+
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 6 (Kargoya Verildi)
+    // Paketleme durumu: Teslimat Sonrası Telefonla Arandı 11
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "6" &&
+      jQuery(this).attr("data-pd") == "11" &&
+      !jQuery(this).hasClass("green")
+    ) {
+      jQuery(this)
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
+        .addClass("green");
+    }
+
+    // Ödeme onayı 1 (bir) içeren
+    // Sipariş durumu: 6 (Kargoya Verildi)
+    // Paketleme durumu: Teslimat Sonrası Telefon Aramasına Gerek Yok 13
+    if (
+      jQuery(this).attr("data-oo").includes("1") &&
+      jQuery(this).attr("data-sd") == "6" &&
+      jQuery(this).attr("data-pd") == "13" &&
+      !jQuery(this).hasClass("green")
+    ) {
+      jQuery(this)
+        .removeClass(["pink", "red", "gray", "orange", "yellow"])
+        .addClass("green");
+    }
+    // Color green ends
+
+    // Color black begins
     if (
       jQuery(this).attr("data-oo").includes("1") &&
       jQuery(this).attr("data-sd") == "13" &&
@@ -77,6 +253,7 @@ function colorize() {
     ) {
       jQuery(this).removeClass("green").addClass("black");
     }
+    // Color black ends
   });
 }
 
@@ -137,8 +314,10 @@ function people() {
   });
 
   for (var i = 0; i < array.length; i++) {
+    sira = i + 1;
     jQuery("#people").append(
-      "Uye: " +
+      sira +
+        " - Uye: " +
         array[i].ad.slice(0, -10) +
         ", Uye ID: " +
         array[i].ad.slice(-10) +
@@ -159,7 +338,23 @@ function showClass(classToShow) {
     .siblings()
     .not("." + classToShow)
     .hide();
-    jQuery("#counter").html(jQuery("." + classToShow).length + " adet");
+  jQuery("#counter").html(jQuery("." + classToShow).length + " adet");
+}
+
+function filterNames(value) {
+  jQuery(".siparis").show();
+  jQuery(".siparis").each(function () {
+    if (!jQuery(this).find(".uye").html().includes(value)) {
+      jQuery(this).hide();
+    }
+  });
+  jQuery("#counter").html(
+    jQuery('.siparis:not([style*="display: none"]).green').length +
+      " adet" +
+      " / " +
+      jQuery('.siparis:not([style*="display: none"])').length +
+      " adet"
+  );
 }
 
 $(document).ready(function () {
@@ -167,11 +362,35 @@ $(document).ready(function () {
   summarize_one();
   summarize_second();
   people();
+  createButtons();
 
   jQuery("#counter").html(jQuery(".siparis").length + " adet");
 
   jQuery("#show-all").bind("click", function () {
     jQuery(".siparis").show();
     jQuery("#counter").html(jQuery(".siparis").length + " adet");
+  });
+
+  jQuery("#show-uncolored").bind("click", function () {
+    jQuery(".siparis").show();
+
+    jQuery(".siparis").each(function () {
+      self = jQuery(this);
+      if (
+        self.hasClass("pink") ||
+        self.hasClass("red") ||
+        self.hasClass("gray") ||
+        self.hasClass("yellow") ||
+        self.hasClass("orange") ||
+        self.hasClass("green") ||
+        self.hasClass("black")
+      ) {
+        self.hide();
+      }
+    });
+
+    jQuery("#counter").html(
+      jQuery('.siparis:not([style*="display: none"])').length + " adet"
+    );
   });
 });
