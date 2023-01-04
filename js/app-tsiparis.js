@@ -153,9 +153,25 @@ function people() {
   // alert(JSON.stringify(array, null, 4));
 }
 
+function showClass(classToShow) {
+  jQuery(".siparis").show();
+  jQuery(".siparis")
+    .siblings()
+    .not("." + classToShow)
+    .hide();
+    jQuery("#counter").html(jQuery("." + classToShow).length + " adet");
+}
+
 $(document).ready(function () {
   colorize();
   summarize_one();
   summarize_second();
   people();
+
+  jQuery("#counter").html(jQuery(".siparis").length + " adet");
+
+  jQuery("#show-all").bind("click", function () {
+    jQuery(".siparis").show();
+    jQuery("#counter").html(jQuery(".siparis").length + " adet");
+  });
 });

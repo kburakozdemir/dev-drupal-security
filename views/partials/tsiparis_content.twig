@@ -1,56 +1,69 @@
-{% for result in results %}
-	{% set odemeVarYokTest = result.Odemeler | length %}
-	{% set odemeAdet = 0 %}
-	{% set odemeOnay = [] %}
+<div id="actions" class="mb-3">
+	<p>
+		<button id="show-all">show all</button>
+		<button onclick="showClass('pink');">show pink</button>
+		<button onclick="showClass('red');">show red</button>
+		<button onclick="showClass('orange');">show orange</button>
+		<button onclick="showClass('green');">show green</button>
+		<button onclick="showClass('yellow');">show yellow</button>
+		<button onclick="showClass('black');">show black</button>
+	</p>
+	<p id="counter"></p>
+</div>
+<div id="content">
+	{% for result in results %}
+		{% set odemeVarYokTest = result.Odemeler | length %}
+		{% set odemeAdet = 0 %}
+		{% set odemeOnay = [] %}
 
-	{% if odemeVarYokTest == 0 %}
-		{% set odemeVarYok = 'yok' %}
-	{% else %}
-		{% set odemeVarYok = 'var' %}
-		{% if result.Odemeler.WebSiparisOdeme.0 is defined %}
-			{% set odemeAdet = result.Odemeler.WebSiparisOdeme | length %}
-			{% for od in result.Odemeler.WebSiparisOdeme %}
-				{% if not loop.last %}
-					{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
-				{% else %}
-					{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
-				{% endif %}
-			{% endfor %}
+		{% if odemeVarYokTest == 0 %}
+			{% set odemeVarYok = 'yok' %}
 		{% else %}
-			{% set odemeAdet = 1 %}
-			{% set odemeOnay = result.Odemeler.WebSiparisOdeme.Onaylandi %}
+			{% set odemeVarYok = 'var' %}
+			{% if result.Odemeler.WebSiparisOdeme.0 is defined %}
+				{% set odemeAdet = result.Odemeler.WebSiparisOdeme | length %}
+				{% for od in result.Odemeler.WebSiparisOdeme %}
+					{% if not loop.last %}
+						{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
+					{% else %}
+						{% set odemeOnay = odemeOnay | merge([od.Onaylandi]) %}
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% set odemeAdet = 1 %}
+				{% set odemeOnay = result.Odemeler.WebSiparisOdeme.Onaylandi %}
+			{% endif %}
 		{% endif %}
-	{% endif %}
 
-	<div class="siparis" data-odemevaryok="{{ odemeVarYok }}" data-sd="{{ result.Durum }}" data-pd="{{ result.PaketlemeDurumuID }}" data-oo="{{ odemeOnay | join(',') }}" id="{{ result.ID }}">
-		<p>Sipariş ID:
-			{{ result.ID }}
-			|
-			{{ result.Durum }}
-			({{ result.SiparisDurumu }})
-																																																																																																																											-																														-
-			{{ result.PaketlemeDurumu }}
-			{{ result.PaketlemeDurumuID }}
-			-
-			<span class="uye">{{ result.UyeAdi }}
-				{{ result.UyeSoyadi }}</span>
-			-
-			<span class="uyeid">{{ result.UyeID }}</span>
-			-
-			{{ result.Mail }}
-			-
-			{{ result.SiparisTarihi }}
-			-
-			<span class="total">{{ result.SiparisToplamTutari }}</span>
-			-
-																											odemeVarYok:
-			{{ odemeVarYok }}
-			-
-																											odemeAdet:
-			{{ odemeAdet }}
-			odemeOnay:
-			{{ odemeOnay | join(',') }}
-		</p>
-
-	</div>
-{% endfor %}
+		<div class="siparis" data-odemevaryok="{{ odemeVarYok }}" data-sd="{{ result.Durum }}" data-pd="{{ result.PaketlemeDurumuID }}" data-oo="{{ odemeOnay | join(',') }}" id="{{ result.ID }}">
+			<p>Sipariş ID:
+				{{ result.ID }}
+				|
+				{{ result.Durum }}
+				({{ result.SiparisDurumu }})
+																																																																																																																																										-																														-
+				{{ result.PaketlemeDurumu }}
+				{{ result.PaketlemeDurumuID }}
+				-
+				<span class="uye">{{ result.UyeAdi }}
+					{{ result.UyeSoyadi }}</span>
+				-
+				<span class="uyeid">{{ result.UyeID }}</span>
+				-
+				{{ result.Mail }}
+				-
+				{{ result.SiparisTarihi }}
+				-
+				<span class="total">{{ result.SiparisToplamTutari }}</span>
+				-
+																																										odemeVarYok:
+				{{ odemeVarYok }}
+				-
+																																										odemeAdet:
+				{{ odemeAdet }}
+				odemeOnay:
+				{{ odemeOnay | join(',') }}
+			</p>
+		</div>
+	{% endfor %}
+</div>
