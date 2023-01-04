@@ -310,7 +310,10 @@ function people() {
   });
 
   array.sort(function (a, b) {
-    return b.adet - a.adet || a.ad.localeCompare(b.ad);
+    // adet desc, ad asc
+    // return b.adet - a.adet || a.ad.localeCompare(b.ad);
+    // adet desc, total desc
+    return b.adet - a.adet || b.total - a.total;
   });
 
   for (var i = 0; i < array.length; i++) {
