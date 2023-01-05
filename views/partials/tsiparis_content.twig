@@ -1,14 +1,14 @@
 <div id="actions" class="mb-3">
 	<p>Bu kısımda green olmayıp green olacak olanlar var. Özellikle orange olanların içinde...
-								  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
-								  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
-	<p id="button-container">
+										  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
+										  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
+	<p id="filter-container">
 		Filter Uye ad:
 		<input id="namefilter" oninput="filterNames(this.value);"/>
-		<br><br>
+	</p>
+	<p id="button-container">
 		<button id="show-all" class="btn btn-success">show all</button>
 		<button id="show-uncolored" class="btn btn-info">show uncolored</button>
-
 	</p>
 	<p id="counter"></p>
 </div>
@@ -43,7 +43,7 @@
 				|
 				{{ result.Durum }}
 				({{ result.SiparisDurumu }})
-																																																																																																																																																														-																														-
+																																																																																																																																																																		-																														-
 				{{ result.PaketlemeDurumu }}
 				{{ result.PaketlemeDurumuID }}
 				-
@@ -58,10 +58,10 @@
 				-
 				<span class="total">{{ result.SiparisToplamTutari }}</span>
 				-
-																odemeVarYok:
+																				odemeKaydıVarYok:
 				{{ odemeVarYok }}
 				-
-																odemeAdet:
+																				odemeAdet:
 				{{ odemeAdet }}
 				odemeOnay:
 				{{ odemeOnay | join(',') }}

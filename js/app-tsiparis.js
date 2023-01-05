@@ -290,8 +290,11 @@ function summarize_second() {
   jQuery("#summary-two").html("Total: " + total + " TL.<br>Adet: " + adet);
 }
 
-function people() {
+function people(sortType = "ordercount") {
   const array = [];
+
+  jQuery("#people").html("");
+
   jQuery("div.green").each(function () {
     value = {
       ad:
@@ -309,12 +312,27 @@ function people() {
     }
   });
 
-  array.sort(function (a, b) {
-    // adet desc, ad asc
-    // return b.adet - a.adet || a.ad.localeCompare(b.ad);
-    // adet desc, total desc
-    return b.adet - a.adet || b.total - a.total;
-  });
+  if (sortType == "ordercount") {
+    array.sort(function (a, b) {
+      // adet desc, ad asc
+      // return b.adet - a.adet || a.ad.localeCompare(b.ad);
+      // adet desc, total desc
+      return b.adet - a.adet || b.total - a.total;
+    });
+    jQuery("#people-sort-message").html(
+      "Sipariş adedi azalan, sipariş tutar toplam azalan şekilde sıralı:"
+    );
+  }
+
+  if (sortType == "total") {
+    array.sort(function (a, b) {
+      // adet desc, ad asc
+      // return b.adet - a.adet || a.ad.localeCompare(b.ad);
+      // adet desc, total desc
+      return b.total - a.total;
+    });
+    jQuery("#people-sort-message").html("Tutara göre azalan şekilde sıralı:");
+  }
 
   for (var i = 0; i < array.length; i++) {
     sira = i + 1;
@@ -337,11 +355,22 @@ function people() {
 
 function showClass(classToShow) {
   jQuery(".siparis").show();
-  jQuery(".siparis")
-    .siblings()
-    .not("." + classToShow)
-    .hide();
-  jQuery("#counter").html(jQuery("." + classToShow).length + " adet");
+  jQuery(".siparis").each(function () {
+    if (!jQuery(this).hasClass(classToShow)) {
+      jQuery(this).hide();
+    }
+  });
+
+  classToShowCount = jQuery("." + classToShow).length;
+  totalCount = jQuery(".siparis").length;
+  jQuery("#counter").html(
+    classToShowCount +
+      " / " +
+      totalCount +
+      " adet (%" +
+      ((classToShowCount / totalCount) * 100).toFixed(2) +
+      ")"
+  );
 }
 
 function filterNames(value) {
@@ -364,7 +393,7 @@ $(document).ready(function () {
   colorize();
   summarize_one();
   summarize_second();
-  people();
+  people("total");
   createButtons();
 
   jQuery("#counter").html(jQuery(".siparis").length + " adet");
