@@ -267,7 +267,11 @@ function summarize_one() {
     total = total + parseFloat(jQuery(this).html());
   });
 
-  html += "Total: " + total + " TL.<br/>";
+  totalFormatted = new Intl.NumberFormat("tr-TR", {
+    style: "currency",
+    currency: "TRY",
+  }).format(total);
+  html += "Total: " + totalFormatted + "<br/>";
 
   html +=
     "Ödemesi hiç olmayan: " +
@@ -287,11 +291,18 @@ function summarize_second() {
     total = total + parseFloat(jQuery(this).html());
     adet = parseInt(index) + 1;
   });
-  jQuery("#summary-two").html("Total: " + total + " TL.<br>Adet: " + adet);
+
+  totalFormatted = new Intl.NumberFormat("tr-TR", {
+    style: "currency",
+    currency: "TRY",
+  }).format(total);
+
+  jQuery("#summary-two").html("Total: " + totalFormatted + "<br>Adet: " + adet);
 }
 
 function people(sortType = "ordercount") {
   const array = [];
+  let caption = "";
 
   jQuery("#people").html("");
 
@@ -319,9 +330,8 @@ function people(sortType = "ordercount") {
       // adet desc, total desc
       return b.adet - a.adet || b.total - a.total;
     });
-    jQuery("#people-sort-message").html(
-      "Sipariş adedi azalan, sipariş tutar toplam azalan şekilde sıralı:"
-    );
+    caption =
+      "Sipariş adedi azalan, sipariş tutar toplam azalan şekilde sıralı";
   }
 
   if (sortType == "total") {
@@ -331,24 +341,41 @@ function people(sortType = "ordercount") {
       // adet desc, total desc
       return b.total - a.total;
     });
-    jQuery("#people-sort-message").html("Tutara göre azalan şekilde sıralı:");
+    caption = "Tutara göre azalan şekilde sıralı";
   }
+
+  const templateHeader = `<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered table-sm caption-top">
+  <caption>${caption}
+		</caption>
+    <tr>
+      <th>Üye</th>
+      <th>Üye ID</th>
+      <th>Sipariş Adet</th>
+      <th>Sipariş Tutar (TL)</th>
+    </tr>`;
+
+  const templateFooter = `</table></div>`;
+
+  html = templateHeader;
 
   for (var i = 0; i < array.length; i++) {
     sira = i + 1;
-    jQuery("#people").append(
-      sira +
-        " - Uye: " +
-        array[i].ad.slice(0, -10) +
-        ", Uye ID: " +
-        array[i].ad.slice(-10) +
-        ", Sipariş Adet: " +
-        array[i].adet +
-        ", Sipariş Tutar: " +
-        roundNumber(array[i].total, 2) +
-        " TL.<br/>"
-    );
+    totalFixed = roundNumber(array[i].total, 2);
+    totalFormatted = new Intl.NumberFormat("tr-TR", {
+      style: "currency",
+      currency: "TRY",
+    }).format(totalFixed);
+    html += `<tr>
+      <td>${array[i].ad.slice(0, -10)}</td>
+      <td>${array[i].ad.slice(-10)}</td>
+      <td class="text-end">${array[i].adet}</td>
+      <td class="text-end">${totalFormatted}</td>
+    </tr>`;
   }
+
+  html += templateFooter;
+  jQuery("#people").append(html);
 
   // alert(JSON.stringify(array, null, 4));
 }
@@ -380,12 +407,20 @@ function filterNames(value) {
       jQuery(this).hide();
     }
   });
+
+  total = 0;
+  jQuery('.siparis:not([style*="display: none"]).green').each(function () {
+    total += parseFloat(jQuery(this).find(".total").html());
+  });
+
   jQuery("#counter").html(
     jQuery('.siparis:not([style*="display: none"]).green').length +
       " adet" +
       " / " +
       jQuery('.siparis:not([style*="display: none"])').length +
-      " adet"
+      " adet - " +
+      total.toFixed(2) +
+      " TL."
   );
 }
 
@@ -393,7 +428,7 @@ $(document).ready(function () {
   colorize();
   summarize_one();
   summarize_second();
-  people("total");
+  people();
   createButtons();
 
   jQuery("#counter").html(jQuery(".siparis").length + " adet");
