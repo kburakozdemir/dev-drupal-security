@@ -1,0 +1,69 @@
+{% set buttonMarkUp = '<p><button id="collapse_all">Collapse all</button></p>' %}
+
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	{% if resultSingle %}
+		<h1>{{ resultSingle.Tanim }}</h1>
+		{{ buttonMarkUp | raw }}
+		<p>
+			<em>
+				<a href="/bikalite/tcategory.php">Kategorilere dön</a>
+			</em>
+		</p>
+		{% for key,value in resultSingle %}
+			<details>
+				<summary>{{ key }}</summary>
+				<div>{{ value | raw }}</div>
+			</details>
+		{% endfor %}
+	{% endif %}
+
+	{% if resultMultiple %}
+		<h1>{{ title }}</h1>
+		<div class="table-responsive">
+			<table id="xxx" class="table table-striped table-hover table-bordered table-sm caption-top">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Kategori</th>
+						<th>Aktiflik Durumu</th>
+						<th>URL</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for result in resultMultiple %}
+						<tr>
+							<td>{{ result.ID }}</td>
+							<td>{{ result.Tanim }}</td>
+							<td>
+								{%if result.Aktif %}
+									Aktif
+								{% else %}
+									Pasif
+								{% endif %}
+							</td>
+							<td>
+								<a href="https://bikalite.com{{result.Url}}">https://bikalite.com{{result.Url}}</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
+
+{% endblock %}
+
+{% block page_based_script %}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+	{% if type == 'complex' %}
+		<script>
+			$(document).ready(function () {
+        $('#xxx').DataTable();
+      });
+		</script>
+	{% endif %}
+{% endblock %}
