@@ -7,11 +7,6 @@ if (isset($_GET["catid"]) && !empty($_GET["catid"])) {
     $catid = $_GET["catid"];
 }
 
-$type = "simple";
-if (isset($_GET["type"]) && !empty($_GET["type"])) {
-    $type = $_GET["type"];
-}
-
 $wsdl_url = $TICIMAXWSDLURLURU;
 $client = new SOAPClient($wsdl_url, ["trace" => 1]);
 
@@ -36,7 +31,6 @@ if ($params["kategoriID"] > 0) {
 // Render our view
 $renderArray = [
     'title' => "Kategori Listesi",
-    'type' => $type,
     'resultSingle' => $resultSingle,
     'resultMultiple' => $resultMultiple
   ];

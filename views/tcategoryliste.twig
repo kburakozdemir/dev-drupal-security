@@ -22,6 +22,11 @@
 
 	{% if resultMultiple %}
 		<h1>{{ title }}</h1>
+		<p id="button-container">
+			<button id="tableDestroy" class="btn btn-danger">table destroy</button>
+			<button id="tableCreate" class="btn btn-danger">table create</button>
+		</p>
+
 		<div class="table-responsive">
 			<table id="xxx" class="table table-striped table-hover table-bordered table-sm caption-top">
 				<thead>
@@ -50,6 +55,14 @@
 						</tr>
 					{% endfor %}
 				</tbody>
+				<tfoot>
+					<tr>
+						<th>ID</th>
+						<th>Kategori</th>
+						<th>Aktiflik Durumu</th>
+						<th>URL</th>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	{% endif %}
@@ -57,13 +70,5 @@
 {% endblock %}
 
 {% block page_based_script %}
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-	{% if type == 'complex' %}
-		<script>
-			$(document).ready(function () {
-        $('#xxx').DataTable();
-      });
-		</script>
-	{% endif %}
+	{% include 'liste.twig' %}
 {% endblock %}
