@@ -7,35 +7,40 @@
 		</h1>
 	</header>
 
-	<!-- Nav tabs -->
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab" aria-controls="security" aria-selected="true">Updates</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="space-tab" data-bs-toggle="tab" data-bs-target="#space" type="button" role="tab" aria-controls="space" aria-selected="false">Drive Space</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web" type="button" role="tab" aria-controls="web" aria-selected="false">Ticimax WS</button>
-		</li>
-	</ul>
+	<div class="row">
+		<div
+			class="col-sm-12">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab" aria-controls="security" aria-selected="true">Updates</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="space-tab" data-bs-toggle="tab" data-bs-target="#space" type="button" role="tab" aria-controls="space" aria-selected="false">Drive Space</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web" type="button" role="tab" aria-controls="web" aria-selected="false">Ticimax WS</button>
+				</li>
+			</ul>
 
-	<!-- Tab panes -->
-	<div class="tab-content">
-		<div class="tab-pane active" id="security" role="tabpanel" aria-labelledby="security-tab" tabindex="0">
-			<div class="container">
-				{% include 'last.twig' %}
-				{% include 'security.twig' %}
-			</div>
-		</div>
-		<div class="tab-pane" id="space" role="tabpanel" aria-labelledby="space-tab" tabindex="0">
-			<div class="container">
-				{% include 'space.twig' %}
-			</div>
-		</div>
-		<div class="tab-pane" id="web" role="tabpanel" aria-labelledby="web-tab" tabindex="0">
-			<div class="container">
-				{% include 'ticimaxnav.html' %}
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="security" role="tabpanel" aria-labelledby="security-tab" tabindex="0">
+					<div class="container">
+						{% include 'last.twig' %}
+						{% include 'security.twig' %}
+					</div>
+				</div>
+				<div class="tab-pane" id="space" role="tabpanel" aria-labelledby="space-tab" tabindex="0">
+					<div class="container">
+						{% include 'space.twig' %}
+					</div>
+				</div>
+				<div class="tab-pane" id="web" role="tabpanel" aria-labelledby="web-tab" tabindex="0">
+					<div class="container">
+						{% include 'ticimaxnav.html' %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

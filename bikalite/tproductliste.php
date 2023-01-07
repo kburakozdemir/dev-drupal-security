@@ -48,6 +48,7 @@ $myArrayx = $myArray["UrunKarti"];
 $i = 0;
 
 $resultListe = [];
+$ciftSKU = [];
 
 while ($i < count($myArrayx)) {
         $varCount = count($myArrayx[$i]['Varyasyonlar']['Varyasyon']);
@@ -70,6 +71,13 @@ while ($i < count($myArrayx)) {
         ];
 
         array_push($resultListe, $productArray);
+
+        if (array_key_exists($stokKod, $ciftSKU)) {
+            $a = $ciftSKU[$stokKod];
+            $ciftSKU[$stokKod] = $a + 1;
+        } else {
+            $ciftSKU[$stokKod] = 1;
+        }
     } else {
         $v = 0;
         while ($v < $varCount) {
@@ -90,6 +98,13 @@ while ($i < count($myArrayx)) {
             ];
             array_push($resultListe, $productArray);
 
+            if (array_key_exists($stokKod, $ciftSKU)) {
+                $a = $ciftSKU[$stokKod];
+                $ciftSKU[$stokKod] = $a + 1;
+            } else {
+                $ciftSKU[$stokKod] = 1;
+            }
+
             $v++;
         }
     }
@@ -97,11 +112,26 @@ while ($i < count($myArrayx)) {
     $i++;
 }
 
+$ciftKesin = array_filter($ciftSKU, "ciftSKUFilter");
+
+$sonuc = count($ciftKesin);
+
+$resultsCift = [];
+
+if ($sonuc == 0) {
+    array_push($resultsCift, "çift sku'lu ürün yok");
+} else {
+    array_push($resultsCift, "çift olan SKUlar (" . $sonuc . " Adet):");
+    foreach ($ciftKesin as $x => $x_value) {
+        array_push($resultsCift, "SKU=" . $x . ", Adet=" . $x_value);
+    }
+}
+
 // Render our view
 $renderArray = [
     'title' => "Ürün Listesi",
-    'results' => $results,
     "resultListe" => $resultListe,
+    "resultsCift" => $resultsCift,
   ];
 
 echo $twig->render('tproductliste.twig', $renderArray);

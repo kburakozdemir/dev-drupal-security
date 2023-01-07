@@ -13,11 +13,7 @@
 	<body>
 		{% include 'navbar.html' %}
 
-		<div class="container mt-5">
-			<div class="row">
-				<div class="col-sm-12"> {% block content %}{% endblock %}
-					</div>
-				</div>
+		<div class="container mt-5"> {% block content %}{% endblock %}
 			</div>
 			<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 			{% block page_based_script %}{% endblock %}
