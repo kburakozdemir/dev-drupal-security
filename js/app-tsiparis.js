@@ -23,6 +23,13 @@ function pad(num, size) {
   return num;
 }
 
+function formatNumber(numberToFormat) {
+  return new Intl.NumberFormat("tr-TR", {
+    style: "currency",
+    currency: "TRY",
+  }).format(numberToFormat);
+}
+
 function createButtons() {
   const buttonColors = [
     "pink",
@@ -267,11 +274,7 @@ function summarize_one() {
     total = total + parseFloat(jQuery(this).html());
   });
 
-  totalFormatted = new Intl.NumberFormat("tr-TR", {
-    style: "currency",
-    currency: "TRY",
-  }).format(total);
-  html += "Total: " + totalFormatted + "<br/>";
+  html += "Total: " + formatNumber(total) + "<br/>";
 
   html +=
     "Ödemesi hiç olmayan: " +
@@ -292,12 +295,9 @@ function summarize_second() {
     adet = parseInt(index) + 1;
   });
 
-  totalFormatted = new Intl.NumberFormat("tr-TR", {
-    style: "currency",
-    currency: "TRY",
-  }).format(total);
-
-  jQuery("#summary-two").html("Total: " + totalFormatted + "<br>Adet: " + adet);
+  jQuery("#summary-two").html(
+    "Total: " + formatNumber(total) + "<br>Adet: " + adet
+  );
 }
 
 function people(sortType = "ordercount") {
@@ -362,15 +362,11 @@ function people(sortType = "ordercount") {
   for (var i = 0; i < array.length; i++) {
     sira = i + 1;
     totalFixed = roundNumber(array[i].total, 2);
-    totalFormatted = new Intl.NumberFormat("tr-TR", {
-      style: "currency",
-      currency: "TRY",
-    }).format(totalFixed);
     html += `<tr>
       <td>${array[i].ad.slice(0, -10)}</td>
       <td>${array[i].ad.slice(-10)}</td>
       <td class="text-end">${array[i].adet}</td>
-      <td class="text-end">${totalFormatted}</td>
+      <td class="text-end">${formatNumber(totalFixed)}</td>
     </tr>`;
   }
 
