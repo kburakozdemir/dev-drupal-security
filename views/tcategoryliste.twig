@@ -34,8 +34,8 @@
 						<th>ID</th>
 						<th>Kategori</th>
 						<th>Aktiflik Durumu</th>
-						<th>URL</th>
-            <th>Bare URL</th>
+						<th>Link</th>
+						<th>Bare URL</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -51,9 +51,9 @@
 								{% endif %}
 							</td>
 							<td>
-								<a href="https://bikalite.com{{result.Url}}">https://bikalite.com{{result.Url}}</a>
+								<a href="https://bikalite.com{{result.Url}}" target="_blank">Link</a>
 							</td>
-              <td>{{ result.Url }}</td>
+							<td>{{ result.Url }}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -62,8 +62,8 @@
 						<th>ID</th>
 						<th>Kategori</th>
 						<th>Aktiflik Durumu</th>
-						<th>URL</th>
-            <th>Bare URL</th>
+						<th>Link</th>
+						<th>Bare URL</th>
 					</tr>
 				</tfoot>
 			</table>
