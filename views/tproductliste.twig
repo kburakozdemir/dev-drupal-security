@@ -22,11 +22,14 @@
 					<thead>
 						<tr>
 							<th>URUNADI</th>
+							<th>Varyasyon Tip</th>
 							<th>Status</th>
 							<th>URUNKARTIID</th>
 							<th>URUNID</th>
 							<th>STOKKODU</th>
 							<th>StokAdedi</th>
+							<th>Satış Fiyatı</th>
+							<th>İndirimli Fiyatı</th>
 							<th>Link</th>
 							<th>Bare URL</th>
 						</tr>
@@ -36,11 +39,14 @@
 						{% for result in resultListe %}
 							<tr>
 								<td>{{ result.URUNADI }}</td>
+                <td>{{ result.varyasyonTip}}</td>
 								<td>{{ result.Aktif }}</td>
 								<td>{{ result.URUNKARTIID }}</td>
 								<td>{{ result.URUNID }}</td>
 								<td class="stokkodu">{{ result.STOKKODU }}</td>
 								<td>{{ result.StokAdedi }}</td>
+								<td>{{ result.satisFiyati }}</td>
+								<td>{{ result.indirimliFiyati }}</td>
 								<td>
 									<a href="https://bikalite.com{{result.UrunSayfaAdresi}}" target="_blank">Link</a>
 								</td>
@@ -52,11 +58,14 @@
 					<tfoot>
 						<tr>
 							<th>URUNADI</th>
+							<th>Varyasyon Tip</th>
 							<th>Status</th>
 							<th>URUNKARTIID</th>
 							<th>URUNID</th>
 							<th>STOKKODU</th>
 							<th>StokAdedi</th>
+							<th>Satış Fiyatı</th>
+							<th>İndirimli Fiyatı</th>
 							<th>Link</th>
 							<th>Bare URL</th>
 						</tr>

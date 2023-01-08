@@ -54,11 +54,20 @@ while ($i < count($myArrayx)) {
         $varCount = count($myArrayx[$i]['Varyasyonlar']['Varyasyon']);
 
     if ($varCount == 165) {
-        $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["ID"];
-        $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["UrunKartiID"];
-        $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokAdedi"];
-        $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon']["StokKodu"];
-        $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon']["Aktif"]) ? "Aktif" : "Pasif");
+        $var = $myArrayx[$i]['Varyasyonlar']['Varyasyon'];
+
+        $id = $var["ID"];
+        $urunKartiID = $var["UrunKartiID"];
+        $stokAdedi = $var["StokAdedi"];
+        $stokKod = $var["StokKodu"];
+        $status = (($var["Aktif"]) ? "Aktif" : "Pasif");
+        $satisFiyati = $var["SatisFiyati"];
+        $indirimliFiyati = $var["IndirimliFiyati"];
+        if (array_key_exists('VaryasyonOzellik', $var["Ozellikler"])) {
+            $varyasyonTip = $var["Ozellikler"]["VaryasyonOzellik"]["Deger"];
+        } else {
+            $varyasyonTip = "";
+        }
 
         $productArray = [
             "URUNADI" => $myArrayx[$i]["UrunAdi"],
@@ -68,6 +77,9 @@ while ($i < count($myArrayx)) {
             "UrunSayfaAdresi" => $myArrayx[$i]["UrunSayfaAdresi"],
             "Aktif" => $status,
             "StokAdedi" => $stokAdedi,
+            "satisFiyati" => $satisFiyati,
+            "indirimliFiyati" => $indirimliFiyati,
+            "varyasyonTip" => $varyasyonTip
         ];
 
         array_push($resultListe, $productArray);
@@ -81,11 +93,20 @@ while ($i < count($myArrayx)) {
     } else {
         $v = 0;
         while ($v < $varCount) {
-            $id = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["ID"];
-            $urunKartiID = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["UrunKartiID"];
-            $stokAdedi = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokAdedi"];
-            $stokKod = $myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["StokKodu"];
-            $status = (($myArrayx[$i]['Varyasyonlar']['Varyasyon'][$v]["Aktif"]) ? "Aktif" : "Pasif");
+            $var = $myArrayx[$i]['Varyasyonlar']['Varyasyon'];
+
+            $id = $var[$v]["ID"];
+            $urunKartiID = $var[$v]["UrunKartiID"];
+            $stokAdedi = $var[$v]["StokAdedi"];
+            $stokKod = $var[$v]["StokKodu"];
+            $status = (($var[$v]["Aktif"]) ? "Aktif" : "Pasif");
+            $satisFiyati = $var[$v]["SatisFiyati"];
+            $indirimliFiyati = $var[$v]["IndirimliFiyati"];
+            if (array_key_exists('VaryasyonOzellik', $var[$v]["Ozellikler"])) {
+                $varyasyonTip = $var[$v]["Ozellikler"]["VaryasyonOzellik"]["Deger"];
+            } else {
+                $varyasyonTip = "";
+            }
 
             $productArray = [
                 "URUNADI" => $myArrayx[$i]["UrunAdi"],
@@ -95,6 +116,9 @@ while ($i < count($myArrayx)) {
                 "UrunSayfaAdresi" => $myArrayx[$i]["UrunSayfaAdresi"],
                 "Aktif" => $status,
                 "StokAdedi" => $stokAdedi,
+                "satisFiyati" => $satisFiyati,
+                "indirimliFiyati" => $indirimliFiyati,
+                "varyasyonTip" => $varyasyonTip,
             ];
             array_push($resultListe, $productArray);
 
