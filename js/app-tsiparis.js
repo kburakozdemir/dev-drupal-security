@@ -32,17 +32,43 @@ function formatNumber(numberToFormat) {
 
 function createButtons() {
   const buttonColors = [
-    "pink",
-    "red",
-    "gray",
-    "yellow",
-    "orange",
-    "green",
-    "black",
+    {
+      name: "pink",
+      description: "Ödeme kaydı yok - Bunlar hiç yokmuş gibi kabul edilebilir.",
+    },
+    {
+      name: "red",
+      description:
+        "SD: 8 (İptal Edildi) - PD: İptal Edildi 12 - Ödeme onay 0 (sıfır)",
+    },
+    {
+      name: "gray",
+      description:
+        "SD: 8 (İptal Edildi), 0 (Siparişiniz Alındı), 4 (Paketleniyor) - PD: İptal Edildi 12 - Ödeme onay 1 (bir) / SD: 8 (İptal Edildi) - - PD Teslimat Sonrası Telefon Aramasına Gerek Yok 13 - Bunlar iade olmalı çünkü ödeme yapılmış",
+    },
+    {
+      name: "yellow",
+      description:
+        " PD: İptal Edildi 12, Ödeme onay 1 (bir) içermeyenler, Bunlar iade değildir çünkü ödeme yapılmamış. Bu kırmızı gibi aslında...",
+    },
+    {
+      name: "orange",
+      description:
+        "Bundan önceki renkleri içermeyen, Ödeme onayı 1 (bir) içermeyen, bu pembeye benziyor yokmuş gibi kabul edilebilirler.",
+    },
+    {
+      name: "green",
+      description:
+        "Bundan önceki renkleri içermeyenler. Bunların hepsinde Ödeme onayı 1 (bir) ya da 1 (bir) içeriyor. Bunun dışında muhtelif SD ve PD içeriyorlar. Bence bunlar gerçekleşmiş (yani ödemesi alınmış, müşteriye teslim edilmiş) sipariş demek.",
+    },
+    { name: "black", description: "SD: 13 (İade Ödemesi Yapıldı)" },
   ];
+
   buttonColors.forEach((element) => {
-    html = `<button class="btn btn-primary" onclick="showClass('${element}');">show ${element}</button>`;
+    html = `<button class="btn ${element.name}" onclick="showClass('${element.name}');">show ${element.name}</button>`;
+    htmlDesc = `<div style="display: inline-block; margin: 5px; padding: 5px;" class="${element.name}">${element.description}</div>`;
     jQuery("#button-container").append(html);
+    jQuery("#legend-container").append(htmlDesc);
   });
 }
 

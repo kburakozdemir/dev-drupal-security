@@ -1,18 +1,36 @@
 <div id="actions" class="mb-3">
 	<p>Bu kısımda green olmayıp green olacak olanlar var. Özellikle orange olanların içinde...
-										  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
-										  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
+																																  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
+																																  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
 	<p id="filter-container">
 		Filter Uye ad:
 		<input id="namefilter" oninput="filterNames(this.value);"/>
 	</p>
-	<p id="button-container">
+	<p id="button-container" style="padding: 10px; border: 1px solid grey;">
 		<button id="show-all" class="btn btn-success">show all</button>
 		<button id="show-uncolored" class="btn btn-info">show uncolored</button>
 	</p>
-	<p id="counter"></p>
+	<div style="padding: 10px; border: 1px solid grey;">
+		<details>
+			<summary>Legend:</summary>
+			<div id="legend-container">
+				SID = Sipariş ID<br/>
+				SD = Sipariş durumu
+				<br/>
+				PD = Paketleme durumu
+				<br/>
+				ÖKD = Ödeme Kaydı Durumu (odemeKaydıVarYok)
+				<br/>
+				ÖA = Ödeme adedi
+				<br/>
+				ÖO = Ödeme Onay
+				<br/>
+			</div>
+		</details>
+	</div>
+	<div id="counter" style="margin: 15px 0px; padding: 10px; border: 1px solid grey;"></p>
 </div>
-<div id="content">
+<div id="content" style="padding: 10px; border: 1px solid grey;">
 	{% for result in results %}
 		{% set odemeVarYokTest = result.Odemeler | length %}
 		{% set odemeAdet = 0 %}
@@ -38,15 +56,16 @@
 		{% endif %}
 
 		<div class="siparis" data-odemevaryok="{{ odemeVarYok }}" data-sd="{{ result.Durum }}" data-pd="{{ result.PaketlemeDurumuID }}" data-oo="{{ odemeOnay | join(',') }}" id="{{ result.ID }}">
-			<p>Sipariş ID:
+			<p>SID:
 				{{ result.ID }}
 				|
+																								SD:
 				{{ result.Durum }}
 				({{ result.SiparisDurumu }})
-																																																																																																																																																																		-																														-
-				{{ result.PaketlemeDurumu }}
+																								| PD:
 				{{ result.PaketlemeDurumuID }}
-				-
+				({{ result.PaketlemeDurumu }})
+																																-
 				<span class="uye">{{ result.UyeAdi }}
 					{{ result.UyeSoyadi }}</span>
 				-
@@ -58,12 +77,12 @@
 				-
 				<span class="total">{{ result.SiparisToplamTutari }}</span>
 				-
-																				odemeKaydıVarYok:
+																																																																ÖKD:
 				{{ odemeVarYok }}
 				-
-																				odemeAdet:
+																																																																ÖA:
 				{{ odemeAdet }}
-				odemeOnay:
+				ÖO:
 				{{ odemeOnay | join(',') }}
 			</p>
 		</div>
