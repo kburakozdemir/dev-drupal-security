@@ -73,7 +73,7 @@ function createButtons() {
 }
 
 function colorize() {
-  jQuery(".siparis").each(function () {
+  jQuery("div#content .siparis").each(function () {
     // Color pink begins
     // There is no payment record
     if (jQuery(this).attr("data-odemevaryok") == "yok") {
@@ -292,7 +292,7 @@ function colorize() {
 
 function summarize_one() {
   html = "";
-  html += "Siparis Adedi: " + jQuery(".siparis").length + "<br/>";
+  html += "Siparis Adedi: " + jQuery(".siparis").length + "<br>";
 
   total = parseFloat(0);
   jQuery(".total").each(function () {
@@ -300,15 +300,15 @@ function summarize_one() {
     total = total + parseFloat(jQuery(this).html());
   });
 
-  html += "Total: " + formatNumber(total) + "<br/>";
+  html += "Total: " + formatNumber(total) + "<br>";
 
   html +=
     "Ödemesi hiç olmayan: " +
     jQuery("div[data-odemevaryok='yok']").length +
-    "<br/>";
+    "<br>";
 
   html +=
-    "Kanımca geçerli sipariş (green): " + jQuery("div.green").length + "<br/>";
+    "Kanımca geçerli sipariş (green): " + jQuery("div.green").length + "<br>";
 
   jQuery("#summary-one").html(html);
 }
@@ -332,20 +332,22 @@ function people(sortType = "ordercount") {
 
   jQuery("#people").html("");
 
-  jQuery("div.green").each(function () {
+  jQuery("div#content .green").each(function () {
+    uyeAd = jQuery(this).find(".uye").html();
+    uyeId = jQuery(this).find(".uyeid").html();
+    totalAmount = parseFloat(jQuery(this).find(".total").html());
+
     value = {
-      ad:
-        jQuery(this).find(".uye").html() +
-        pad(jQuery(this).find(".uyeid").html(), 10),
+      ad: uyeAd + pad(uyeId, 10),
       adet: 1,
-      total: parseFloat(jQuery(this).find(".total").html()),
+      total: totalAmount,
     };
     const exists = array.findIndex((object) => object.ad === value.ad);
     if (exists === -1) {
       array.push(value);
     } else {
       array[exists].adet += 1;
-      array[exists].total += parseFloat(jQuery(this).find(".total").html());
+      array[exists].total += totalAmount;
     }
   });
 

@@ -1,10 +1,10 @@
 <div id="actions" class="mb-3">
 	<p>Bu kısımda green olmayıp green olacak olanlar var. Özellikle orange olanların içinde...
-																																  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
-																																  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
+																																		  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
+																																		  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
 	<p id="filter-container">
 		Filter Uye ad:
-		<input id="namefilter" oninput="filterNames(this.value);"/>
+		<input id="namefilter" oninput="filterNames(this.value);">
 	</p>
 	<p id="button-container" style="padding: 10px; border: 1px solid grey;">
 		<button id="show-all" class="btn btn-success">show all</button>
@@ -14,21 +14,21 @@
 		<details>
 			<summary>Legend:</summary>
 			<div id="legend-container">
-				SID = Sipariş ID<br/>
+				SID = Sipariş ID<br>
 				SD = Sipariş durumu
-				<br/>
+				<br>
 				PD = Paketleme durumu
-				<br/>
+				<br>
 				ÖKD = Ödeme Kaydı Durumu (odemeKaydıVarYok)
-				<br/>
+				<br>
 				ÖA = Ödeme adedi
-				<br/>
+				<br>
 				ÖO = Ödeme Onay
-				<br/>
+				<br>
 			</div>
 		</details>
 	</div>
-	<div id="counter" style="margin: 15px 0px; padding: 10px; border: 1px solid grey;"></p>
+	<div id="counter" style="margin: 15px 0px; padding: 10px; border: 1px solid grey;"></div>
 </div>
 <div id="content" style="padding: 10px; border: 1px solid grey;">
 	{% for result in results %}
@@ -59,13 +59,13 @@
 			<p>SID:
 				{{ result.ID }}
 				|
-																								SD:
+																												SD:
 				{{ result.Durum }}
 				({{ result.SiparisDurumu }})
-																								| PD:
+																												| PD:
 				{{ result.PaketlemeDurumuID }}
 				({{ result.PaketlemeDurumu }})
-																																-
+																																				-
 				<span class="uye">{{ result.UyeAdi }}
 					{{ result.UyeSoyadi }}</span>
 				-
@@ -77,10 +77,10 @@
 				-
 				<span class="total">{{ result.SiparisToplamTutari }}</span>
 				-
-																																																																ÖKD:
+																																																																				ÖKD:
 				{{ odemeVarYok }}
 				-
-																																																																ÖA:
+																																																																				ÖA:
 				{{ odemeAdet }}
 				ÖO:
 				{{ odemeOnay | join(',') }}
