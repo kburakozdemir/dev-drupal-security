@@ -43,3 +43,12 @@
   background-color: black;
   color: white;
 }
+
+#legend-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > * {
+    flex: 1 0 31%;
+  }
+}

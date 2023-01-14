@@ -1,7 +1,7 @@
 <div id="actions" class="mb-3">
 	<p>Bu kısımda green olmayıp green olacak olanlar var. Özellikle orange olanların içinde...
-																																		  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
-																																		  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
+																																						  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
+																																						  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
 	<p id="filter-container">
 		Filter Uye ad:
 		<input id="namefilter" oninput="filterNames(this.value);">
@@ -13,18 +13,22 @@
 	<div style="padding: 10px; border: 1px solid grey;">
 		<details>
 			<summary>Legend:</summary>
-			<div id="legend-container">
-				SID = Sipariş ID<br>
-				SD = Sipariş durumu
-				<br>
-				PD = Paketleme durumu
-				<br>
-				ÖKD = Ödeme Kaydı Durumu (odemeKaydıVarYok)
-				<br>
-				ÖA = Ödeme adedi
-				<br>
-				ÖO = Ödeme Onay
-				<br>
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						SID = Sipariş ID<br>
+						SD = Sipariş durumu
+						<br>
+						PD = Paketleme durumu
+						<br>
+						ÖKD = Ödeme Kaydı Durumu (odemeKaydıVarYok)
+						<br>
+						ÖA = Ödeme adedi
+						<br>
+						ÖO = Ödeme Onay
+					</div>
+					<div id="legend-container" class="col-6"></div>
+				</div>
 			</div>
 		</details>
 	</div>
@@ -59,13 +63,13 @@
 			<p>SID:
 				{{ result.ID }}
 				|
-																												SD:
+																																				SD:
 				{{ result.Durum }}
 				({{ result.SiparisDurumu }})
-																												| PD:
+																																				| PD:
 				{{ result.PaketlemeDurumuID }}
 				({{ result.PaketlemeDurumu }})
-																																				-
+																																												-
 				<span class="uye">{{ result.UyeAdi }}
 					{{ result.UyeSoyadi }}</span>
 				-
@@ -77,10 +81,10 @@
 				-
 				<span class="total">{{ result.SiparisToplamTutari }}</span>
 				-
-																																																																				ÖKD:
+																																																																												ÖKD:
 				{{ odemeVarYok }}
 				-
-																																																																				ÖA:
+																																																																												ÖA:
 				{{ odemeAdet }}
 				ÖO:
 				{{ odemeOnay | join(',') }}
