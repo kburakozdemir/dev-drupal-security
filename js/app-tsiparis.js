@@ -412,7 +412,7 @@ function showClass(classToShow) {
     }
   });
 
-  classToShowCount = jQuery("." + classToShow).length;
+  classToShowCount = jQuery("div#content ." + classToShow).length;
   totalCount = jQuery(".siparis").length;
   jQuery("#counter").html(
     classToShowCount +
