@@ -1,0 +1,45 @@
+.siparis {
+  word-break: break-all;
+}
+
+.tab-pane {
+  padding-top: 1rem;
+}
+
+#button-container {
+  display: flex;
+  flex-wrap: wrap;
+  button {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.pink {
+  background-color: pink;
+}
+
+.red {
+  background-color: #ff2400;
+}
+
+.gray {
+  background-color: gray;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: #aaff00;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
