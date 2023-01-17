@@ -1,7 +1,7 @@
 <div id="actions" class="mb-3">
-	<p>Bu kısımda green olmayıp green olacak olanlar var. Özellikle orange olanların içinde...
-																																						  Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
-																																						  yapan JavaScript kodu içine koşul olarak koyacağız.</p>
+	<p>Bu kısımda green olmayıp green olacak olanlar olabilir. Özellikle orange olanların içinde...
+					Onların hangi koşulları sağlayarak green haline geleceğini renklendirmeyi
+					yapan JavaScript kodu içine koşul olarak koyabiliriz.</p>
 	<p id="filter-container">
 		Filter Uye ad:
 		<input id="namefilter" oninput="filterNames(this.value);">
@@ -63,13 +63,13 @@
 			<p>SID:
 				{{ result.ID }}
 				|
-																																				SD:
+																																												SD:
 				{{ result.Durum }}
 				({{ result.SiparisDurumu }})
-																																				| PD:
+																																												| PD:
 				{{ result.PaketlemeDurumuID }}
 				({{ result.PaketlemeDurumu }})
-																																												-
+																																																				-
 				<span class="uye">{{ result.UyeAdi }}
 					{{ result.UyeSoyadi }}</span>
 				-
@@ -81,10 +81,10 @@
 				-
 				<span class="total">{{ result.SiparisToplamTutari }}</span>
 				-
-																																																																												ÖKD:
+																																																																																				ÖKD:
 				{{ odemeVarYok }}
 				-
-																																																																												ÖA:
+																																																																																				ÖA:
 				{{ odemeAdet }}
 				ÖO:
 				{{ odemeOnay | join(',') }}
