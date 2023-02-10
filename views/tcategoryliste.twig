@@ -35,6 +35,13 @@
 								<th>Aktiflik Durumu</th>
 								<th>Link</th>
 								<th>Bare URL</th>
+								<th>KategoriMenuGoster</th>
+								<th>Kod</th>
+								<th>PID</th>
+								<th>SeoAnahtarKelime</th>
+								<th>SeoSayfaAciklama</th>
+								<th>SeoSayfaBaslik</th>
+								<th>Sira</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -53,6 +60,19 @@
 										<a href="https://bikalite.com{{result.Url}}" target="_blank">Link</a>
 									</td>
 									<td>{{ result.Url }}</td>
+									<td>
+										{%if result.KategoriMenuGoster %}
+											Show
+										{% else %}
+											Hide
+										{% endif %}
+									</td>
+									<td>{{ result.Kod }}</td>
+									<td>{{ result.PID }}</td>
+									<td>{{ result.SeoAnahtarKelime }}</td>
+									<td>{{ result.SeoSayfaAciklama }}</td>
+									<td>{{ result.SeoSayfaBaslik }}</td>
+									<td>{{ result.Sira }}</td>
 								</tr>
 							{% endfor %}
 						</tbody>
@@ -63,6 +83,13 @@
 								<th>Aktiflik Durumu</th>
 								<th>Link</th>
 								<th>Bare URL</th>
+								<th>KategoriMenuGoster</th>
+								<th>Kod</th>
+								<th>PID</th>
+								<th>SeoAnahtarKelime</th>
+								<th>SeoSayfaAciklama</th>
+								<th>SeoSayfaBaslik</th>
+								<th>Sira</th>
 							</tr>
 						</tfoot>
 					</table>
